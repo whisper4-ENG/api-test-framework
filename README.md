@@ -194,7 +194,15 @@ testcases/test_order.py::TestOrder::test_create_order PASSED
 testcases/test_order.py::TestOrder::test_query_order PASSED
 ```
 
+## 项目截图
 
+### 项目结构
+
+![project_structure](images/project_structure.png)
+
+### 测试执行结果
+
+![pytest_result](images/pytest_result.png)
 
 
 
