@@ -204,6 +204,8 @@ testcases/test_order.py::TestOrder::test_query_order PASSED
 
 ![pytest_result](images/pytest_result.png)
 
+## Allure测试报告
 
+![allure](images/allure.png)
 
 
