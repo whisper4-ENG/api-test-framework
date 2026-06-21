@@ -1,0 +1,9 @@
+login_success:
+  username: admin
+  password: "123456"
+  expect_code: 200
+
+login_fail:
+  username: admin
+  password: "111111"
+  expect_code: 401
