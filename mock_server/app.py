@@ -18,6 +18,23 @@ products = [
 
 orders = []
 
+@app.route("/product/<int:product_id>")
+def product_detail(product_id):
+
+    for item in products:
+
+        if item["id"] == product_id:
+
+            return jsonify({
+                "code": 200,
+                "data": item
+            })
+
+    return jsonify({
+        "code": 404,
+        "msg": "product not found"
+    })
+
 @app.route("/products", methods=["GET"])
 def product_list():
 
@@ -38,13 +55,24 @@ def create_order():
             "msg": "invalid token"
         })
 
+
     data = request.json
+
+    product_id = data["product_id"]
+    quantity = data["quantity"]
+
+    if quantity <= 0:
+        return jsonify({
+            "code": 400,
+            "msg": "quantity error"
+        })
 
     order = {
         "order_id": len(orders) + 1,
         "product_id": data["product_id"],
         "quantity": data["quantity"]
     }
+
 
     orders.append(order)
 
@@ -56,6 +84,14 @@ def create_order():
 
 @app.route("/order/detail/<int:order_id>", methods=["GET"])
 def query_order(order_id):
+
+    token = request.headers.get("Authorization")
+
+    if token != TOKEN:
+        return jsonify({
+            "code": 403,
+            "msg": "invalid token"
+        })
 
     for order in orders:
 
@@ -70,20 +106,7 @@ def query_order(order_id):
         "msg": "not found"
     })
 
-    data = request.json
 
-    order = {
-        "order_id": len(orders) + 1,
-        "product_id": data["product_id"],
-        "quantity": data["quantity"]
-    }
-
-    orders.append(order)
-
-    return jsonify({
-        "code": 200,
-        "data": order
-    })
 
 @app.route("/login", methods=["POST"])
 def login():

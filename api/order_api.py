@@ -24,10 +24,14 @@ class OrderAPI(BaseAPI):
 
     def query_order(
             self,
+            token,
             order_id
     ):
 
         return self.send(
             "GET",
-            f"/order/detail/{order_id}"
+            f"/order/detail/{order_id}",
+            headers={
+                "Authorization": token
+            }
         )

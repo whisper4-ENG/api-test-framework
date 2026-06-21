@@ -3,7 +3,22 @@ login_success:
   password: "123456"
   expect_code: 200
 
-login_fail:
+wrong_password:
   username: admin
   password: "111111"
+  expect_code: 401
+
+wrong_username:
+  username: admin1
+  password: "123456"
+  expect_code: 401
+
+empty_username:
+  username: ""
+  password: "123456"
+  expect_code: 401
+
+empty_password:
+  username: admin
+  password: ""
   expect_code: 401
